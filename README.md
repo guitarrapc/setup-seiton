@@ -11,7 +11,7 @@ Install latest seiton.
 ```yaml
 steps:
   - uses: actions/checkout@v6
-  - uses: guitarrapc/setup-seiton@v1.0.1
+  - uses: guitarrapc/setup-seiton@v1.0.2
   - run: seiton --version
   - run: seiton
 ```
@@ -21,7 +21,7 @@ Install a specific version.
 ```yaml
 steps:
   - uses: actions/checkout@v6
-  - uses: guitarrapc/setup-seiton@v1.0.1
+  - uses: guitarrapc/setup-seiton@v1.0.2
     with:
       seiton-version: 0.9.19
 ```

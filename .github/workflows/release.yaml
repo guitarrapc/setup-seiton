@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: "Existing Git tag to release (e.g. v1.0.1). Must already exist on the remote."
+        description: "Existing Git tag to release (e.g. v1.0.2). Must already exist on the remote."
         required: true
         type: string
 
