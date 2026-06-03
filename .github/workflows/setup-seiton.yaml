@@ -8,6 +8,7 @@ on:
 jobs:
   with-latest:
     strategy:
+      fail-fast: false
       matrix:
         os:
           - ubuntu-24.04
@@ -29,6 +30,7 @@ jobs:
 
   with-version:
     strategy:
+      fail-fast: false
       matrix:
         os:
           - ubuntu-24.04
@@ -53,6 +55,7 @@ jobs:
 
   with-version-v-prefix:
     strategy:
+      fail-fast: false
       matrix:
         os:
           - ubuntu-24.04
