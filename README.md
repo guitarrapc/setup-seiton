@@ -29,7 +29,7 @@ steps:
 | Name | Description | Default |
 | --- | --- | --- |
 | `seiton-version` | Version to install. `latest` by default. You can pass `0.9.19` or `v0.9.19`. | `latest` |
-| `github-token` | Token used for GitHub Releases API requests. Falls back to `GITHUB_TOKEN` env var when omitted. | (none) |
+| `github-token` | Token used for GitHub Releases API requests. Falls back to `GITHUB_TOKEN` env var when omitted. | `${{ github.token }}` |
 
 ## Outputs
 

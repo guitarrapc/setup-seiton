@@ -49,9 +49,9 @@ jobs:
       # seiton: disable-next-line unpinned-uses
       - uses: ./
         with:
-          seiton_version: "0.9.19"
+          seiton-version: "0.9.19"
       - run: |
-          node -e "const {execSync}=require('node:child_process'); const v=execSync('seiton --version',{encoding:'utf8'}).trim(); if(v !== 'seiton version 0.9.19'){ throw new Error('Unexpected version: '+v); }"
+          node -e "const {execSync}=require('node:child_process'); const v=execSync('seiton --version',{encoding:'utf8'}).trim(); if(!/^v?0\.9\.19$/.test(v)){ throw new Error('Unexpected version: '+v); }"
 
   with-version-v-prefix:
     strategy:
@@ -74,6 +74,6 @@ jobs:
       # seiton: disable-next-line unpinned-uses
       - uses: ./
         with:
-          seiton_version: "v0.9.19"
+          seiton-version: "v0.9.19"
       - run: |
-          node -e "const {execSync}=require('node:child_process'); const v=execSync('seiton --version',{encoding:'utf8'}).trim(); if(v !== 'seiton version 0.9.19'){ throw new Error('Unexpected version: '+v); }"
+          node -e "const {execSync}=require('node:child_process'); const v=execSync('seiton --version',{encoding:'utf8'}).trim(); if(!/^v?0\.9\.19$/.test(v)){ throw new Error('Unexpected version: '+v); }"
