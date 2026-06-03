@@ -8,7 +8,7 @@
   "publisher": "guitarrapc",
   "main": "dist/index.js",
   "scripts": {
-    "build": "ncc build index.js --out dist",
+    "build": "node -e \"import('node:fs/promises').then(fs=>fs.rm('dist',{recursive:true,force:true})).then(()=>process.exit(0))\" && rollup --config rollup.config.js",
     "test": "node --test"
   },
   "engines": {
@@ -26,6 +26,8 @@
     "@actions/tool-cache": "4.0.0"
   },
   "devDependencies": {
-    "@vercel/ncc": "0.38.4"
+    "@rollup/plugin-commonjs": "29.0.0",
+    "@rollup/plugin-node-resolve": "16.0.3",
+    "rollup": "4.57.1"
   }
 }
