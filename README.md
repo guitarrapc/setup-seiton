@@ -21,22 +21,22 @@ steps:
   - uses: actions/checkout@v6
   - uses: guitarrapc/setup-seiton@v1
     with:
-      seiton_version: 0.9.19
+      seiton-version: 0.9.19
 ```
 
 ## Inputs
 
 | Name | Description | Default |
 | --- | --- | --- |
-| `seiton_version` | Version to install. `latest` by default. You can pass `0.9.19` or `v0.9.19`. | `latest` |
-| `github_token` | Token used for GitHub Releases API requests. Falls back to `GITHUB_TOKEN` env var when omitted. | (none) |
+| `seiton-version` | Version to install. `latest` by default. You can pass `0.9.19` or `v0.9.19`. | `latest` |
+| `github-token` | Token used for GitHub Releases API requests. Falls back to `GITHUB_TOKEN` env var when omitted. | (none) |
 
 ## Outputs
 
 | Name | Description |
 | --- | --- |
-| `seiton_version` | Installed version string without `v` prefix. |
-| `seiton_path` | Directory path added to `PATH` that contains seiton binary. |
+| `seiton-version` | Installed version string without `v` prefix. |
+| `seiton-path` | Directory path added to `PATH` that contains seiton binary. |
 
 ## Development
 

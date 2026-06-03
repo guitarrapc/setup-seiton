@@ -84,8 +84,8 @@ test('runSetupSeiton installs expected artifact on linux flow', async () => {
 
     const core = {
         getInput(name) {
-            if (name === 'seiton_version') return '0.9.19';
-            if (name === 'github_token') return '';
+            if (name === 'seiton-version') return '0.9.19';
+            if (name === 'github-token') return '';
             return '';
         },
         info(message) {
@@ -163,8 +163,8 @@ test('runSetupSeiton installs expected artifact on linux flow', async () => {
 
     assert.equal(result.releaseTag, 'v0.9.19');
     assert.equal(result.version, '0.9.19');
-    assert.equal(coreCalls.outputs.seiton_version, '0.9.19');
-    assert.equal(coreCalls.outputs.seiton_path, extractedDir);
+    assert.equal(coreCalls.outputs['seiton-version'], '0.9.19');
+    assert.equal(coreCalls.outputs['seiton-path'], extractedDir);
     assert.deepEqual(coreCalls.paths, [extractedDir]);
     assert.deepEqual(chmodCalls, [{ filePath: path.join(extractedDir, 'seiton'), mode: 0o755 }]);
     assert.equal(releaseToken, 'env-token');
@@ -185,8 +185,8 @@ test('runSetupSeiton fails when checksum mismatches', async () => {
 
     const core = {
         getInput(name) {
-            if (name === 'seiton_version') return '0.9.19';
-            if (name === 'github_token') return '';
+            if (name === 'seiton-version') return '0.9.19';
+            if (name === 'github-token') return '';
             return '';
         },
         info() { },
