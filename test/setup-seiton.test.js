@@ -113,17 +113,11 @@ test('runSetupSeiton installs expected artifact on linux flow', async () => {
         }
     };
 
-    const io = {
-        async chmod(filePath, mode) {
-            assert.equal(filePath, path.join(extractedDir, 'seiton'));
-            assert.equal(mode, '755');
-        }
-    };
+    const chmodCalls = [];
 
     const result = await runSetupSeiton({
         core,
         tc,
-        io,
         getReleaseFn: async () => ({
             tag_name: 'v0.9.19',
             assets: [
@@ -141,6 +135,10 @@ test('runSetupSeiton installs expected artifact on linux flow', async () => {
         repo: 'fake-repo',
         platform: 'linux',
         arch: 'x64',
+        chmodFn(filePath, mode) {
+            chmodCalls.push({ filePath, mode });
+            return Promise.resolve();
+        },
         fileExists(filePath) {
             return filePath === path.join(extractedDir, 'seiton');
         }
@@ -151,6 +149,7 @@ test('runSetupSeiton installs expected artifact on linux flow', async () => {
     assert.equal(coreCalls.outputs.seiton_version, '0.9.19');
     assert.equal(coreCalls.outputs.seiton_path, extractedDir);
     assert.deepEqual(coreCalls.paths, [extractedDir]);
+    assert.deepEqual(chmodCalls, [{ filePath: path.join(extractedDir, 'seiton'), mode: 0o755 }]);
     assert.ok(coreCalls.info.includes('Checksum verified'));
     assert.ok(coreCalls.info.includes('Installed seiton v0.9.19'));
 });
@@ -189,15 +188,10 @@ test('runSetupSeiton fails when checksum mismatches', async () => {
         }
     };
 
-    const io = {
-        async chmod() { }
-    };
-
     await assert.rejects(
         runSetupSeiton({
             core,
             tc,
-            io,
             getReleaseFn: async () => ({
                 tag_name: 'v0.9.19',
                 assets: [

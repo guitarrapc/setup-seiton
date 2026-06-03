@@ -152,7 +152,6 @@ async function runSetupSeiton(deps) {
     const {
         core,
         tc,
-        io,
         owner = DEFAULT_OWNER,
         repo = DEFAULT_REPO,
         platform = process.platform,
@@ -160,7 +159,8 @@ async function runSetupSeiton(deps) {
         fileExists = fs.existsSync,
         getReleaseFn = getRelease,
         readFileFn = fsp.readFile,
-        sha256FileFn = sha256File
+        sha256FileFn = sha256File,
+        chmodFn = fsp.chmod
     } = deps;
 
     const requestedVersion = core.getInput('seiton_version') || 'latest';
@@ -201,7 +201,7 @@ async function runSetupSeiton(deps) {
     }
 
     if (platform !== 'win32') {
-        await io.chmod(binaryPath, '755');
+        await chmodFn(binaryPath, 0o755);
     }
 
     const normalizedVersion = release.tag_name.startsWith('v') ? release.tag_name.slice(1) : release.tag_name;
