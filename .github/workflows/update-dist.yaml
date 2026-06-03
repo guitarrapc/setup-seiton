@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "package.json"
+      - "package-lock.json"
+      - "index.js"
+      - "lib/**"
+      - "!dist/**"
 
 jobs:
   update-dist:
