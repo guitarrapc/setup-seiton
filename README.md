@@ -4,6 +4,20 @@ GitHub Actions JavaScript action to install the [seiton](https://github.com/guit
 
 This action follows the same setup-action style as setup-terraform: resolve a release version, download the matching OS/architecture archive, extract it, and expose the binary for subsequent steps.
 
+## Development
+
+Run build:
+
+```bash
+npm run build
+```
+
+Run unit tests:
+
+```bash
+npm test
+```
+
 ## Usage
 
 Install latest seiton:

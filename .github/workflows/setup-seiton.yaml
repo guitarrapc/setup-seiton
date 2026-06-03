@@ -1,4 +1,4 @@
-name: build
+name: setup-seiton
 on:
   push:
     branches: [main]
@@ -45,8 +45,9 @@ jobs:
           persist-credentials: false
       - uses: ./
         with:
-          version: "0.9.19"
-      - run: test "$(seiton --version)" = "seiton version 0.9.19"
+          seiton_version: "0.9.19"
+      - run: |
+          node -e "const {execSync}=require('node:child_process'); const v=execSync('seiton --version',{encoding:'utf8'}).trim(); if(v !== 'seiton version 0.9.19'){ throw new Error('Unexpected version: '+v); }"
 
   with-version-v-prefix:
     strategy:
@@ -67,5 +68,6 @@ jobs:
           persist-credentials: false
       - uses: ./
         with:
-          version: "v0.9.19"
-      - run: test "$(seiton --version)" = "seiton version 0.9.19"
+          seiton_version: "v0.9.19"
+      - run: |
+          node -e "const {execSync}=require('node:child_process'); const v=execSync('seiton --version',{encoding:'utf8'}).trim(); if(v !== 'seiton version 0.9.19'){ throw new Error('Unexpected version: '+v); }"
