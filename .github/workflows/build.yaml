@@ -6,7 +6,7 @@ on:
     branches: [main]
 
 jobs:
-  test-and-build:
+  build:
     timeout-minutes: 10
     runs-on: ubuntu-24.04
     permissions:

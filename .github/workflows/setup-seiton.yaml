@@ -77,3 +77,10 @@ jobs:
           seiton-version: "v0.9.19"
       - run: |
           node -e "const {execSync}=require('node:child_process'); const v=execSync('seiton --version',{encoding:'utf8'}).trim(); if(!/^v?0\.9\.19$/.test(v)){ throw new Error('Unexpected version: '+v); }"
+
+  setup-complete:
+    needs: [with-latest, with-version, with-version-v-prefix]
+    runs-on: ubuntu-24.04
+    permissions: {}
+    steps:
+      - run: echo "Setup complete"
