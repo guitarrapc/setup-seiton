@@ -1,8 +1,8 @@
-const core = require('@actions/core');
-const tc = require('@actions/tool-cache');
-const io = require('@actions/io');
-const { runSetupSeiton } = require('./lib/setup-seiton');
+import * as core from '@actions/core';
+import * as tc from '@actions/tool-cache';
+import * as io from '@actions/io';
+import { runSetupSeiton } from './lib/setup-seiton.js';
 
 runSetupSeiton({ core, tc, io }).catch((error) => {
-  core.setFailed(`Setup seiton failed: ${error.message}`);
+    core.setFailed(`Setup seiton failed: ${error.message}`);
 });
