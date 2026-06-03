@@ -1,6 +1,4 @@
-[![build](https://github.com/guitarrapc/setup-seiton/actions/workflows/build.yaml/badge.svg)](https://github.com/guitarrapc/setup-seiton/actions/workflows/build.yaml)
-[![setup seiton](https://github.com/guitarrapc/setup-seiton/actions/workflows/setup-seiton.yaml/badge.svg)](https://github.com/guitarrapc/setup-seiton/actions/workflows/setup-seiton.yaml)
-[![release](https://github.com/guitarrapc/setup-seiton/actions/workflows/release.yaml/badge.svg)](https://github.com/guitarrapc/setup-seiton/actions/workflows/release.yaml)
+[![build](https://github.com/guitarrapc/setup-seiton/actions/workflows/build.yaml/badge.svg)](https://github.com/guitarrapc/setup-seiton/actions/workflows/build.yaml) [![setup seiton](https://github.com/guitarrapc/setup-seiton/actions/workflows/setup-seiton.yaml/badge.svg)](https://github.com/guitarrapc/setup-seiton/actions/workflows/setup-seiton.yaml) [![release](https://github.com/guitarrapc/setup-seiton/actions/workflows/release.yaml/badge.svg)](https://github.com/guitarrapc/setup-seiton/actions/workflows/release.yaml)
 
 # setup-seiton
 
