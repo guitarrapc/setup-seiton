@@ -1,4 +1,4 @@
-name: setup-seiton
+name: setup seiton
 on:
   push:
     branches: [main]
