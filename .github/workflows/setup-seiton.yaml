@@ -19,10 +19,13 @@ jobs:
           ]
     timeout-minutes: 10
     runs-on: ${{ matrix.os }}
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           persist-credentials: false
+      # seiton: disable-next-line unpinned-uses
       - uses: ./
       - run: seiton --version
 
@@ -39,10 +42,13 @@ jobs:
           ]
     timeout-minutes: 10
     runs-on: ${{ matrix.os }}
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           persist-credentials: false
+      # seiton: disable-next-line unpinned-uses
       - uses: ./
         with:
           seiton_version: "0.9.19"
@@ -62,10 +68,13 @@ jobs:
           ]
     timeout-minutes: 10
     runs-on: ${{ matrix.os }}
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           persist-credentials: false
+      # seiton: disable-next-line unpinned-uses
       - uses: ./
         with:
           seiton_version: "v0.9.19"
