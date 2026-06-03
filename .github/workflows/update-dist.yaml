@@ -4,12 +4,8 @@ on:
   push:
     branches:
       - main
-    paths:
-      - "package.json"
-      - "package-lock.json"
-      - "index.js"
-      - "lib/**"
-      - "!dist/**"
+    paths-ignore:
+      - "README.md"
 
 jobs:
   update-dist:
