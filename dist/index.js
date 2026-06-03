@@ -135,7 +135,7 @@ function parseExpectedSha(checksumContent, fileName) {
 
 async function downloadAsset(asset, token, tc) {
     const headers = token ? { Authorization: `Bearer ${token}` } : undefined;
-    return tc.downloadTool(asset.browser_download_url, undefined, undefined, headers);
+    return tc.downloadTool(asset.browser_download_url, undefined, { headers });
 }
 
 async function extractArchive(archivePath, archiveName, tc) {
@@ -164,7 +164,7 @@ async function runSetupSeiton(deps) {
     } = deps;
 
     const requestedVersion = core.getInput('seiton_version') || 'latest';
-    const token = core.getInput('github_token');
+    const token = core.getInput('github_token') || process.env.GITHUB_TOKEN || '';
     const mappedPlatform = mapPlatform(platform);
     const mappedArch = mapArch(arch);
     const extension = platform === 'win32' ? 'zip' : 'tar.gz';

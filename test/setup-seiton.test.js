@@ -100,9 +100,11 @@ test('runSetupSeiton installs expected artifact on linux flow', async () => {
     };
 
     let downloadCount = 0;
+    const downloadOptions = [];
     const tc = {
-        async downloadTool() {
+        async downloadTool(_url, _dest, options) {
             downloadCount += 1;
+            downloadOptions.push(options);
             return downloadCount === 1 ? archivePath : checksumsPath;
         },
         async extractTar() {
@@ -114,35 +116,50 @@ test('runSetupSeiton installs expected artifact on linux flow', async () => {
     };
 
     const chmodCalls = [];
+    let releaseToken = '';
+    const previousGithubToken = process.env.GITHUB_TOKEN;
+    process.env.GITHUB_TOKEN = 'env-token';
 
-    const result = await runSetupSeiton({
-        core,
-        tc,
-        getReleaseFn: async () => ({
-            tag_name: 'v0.9.19',
-            assets: [
-                {
-                    name: 'seiton-linux-amd64.tar.gz',
-                    browser_download_url: 'https://example.invalid/seiton-linux-amd64.tar.gz'
-                },
-                {
-                    name: 'checksums-sha256.txt',
-                    browser_download_url: 'https://example.invalid/checksums-sha256.txt'
-                }
-            ]
-        }),
-        owner: 'fake-owner',
-        repo: 'fake-repo',
-        platform: 'linux',
-        arch: 'x64',
-        chmodFn(filePath, mode) {
-            chmodCalls.push({ filePath, mode });
-            return Promise.resolve();
-        },
-        fileExists(filePath) {
-            return filePath === path.join(extractedDir, 'seiton');
+    let result;
+    try {
+        result = await runSetupSeiton({
+            core,
+            tc,
+            getReleaseFn: async (_versionTag, token) => {
+                releaseToken = token;
+                return {
+                    tag_name: 'v0.9.19',
+                    assets: [
+                        {
+                            name: 'seiton-linux-amd64.tar.gz',
+                            browser_download_url: 'https://example.invalid/seiton-linux-amd64.tar.gz'
+                        },
+                        {
+                            name: 'checksums-sha256.txt',
+                            browser_download_url: 'https://example.invalid/checksums-sha256.txt'
+                        }
+                    ]
+                };
+            },
+            owner: 'fake-owner',
+            repo: 'fake-repo',
+            platform: 'linux',
+            arch: 'x64',
+            chmodFn(filePath, mode) {
+                chmodCalls.push({ filePath, mode });
+                return Promise.resolve();
+            },
+            fileExists(filePath) {
+                return filePath === path.join(extractedDir, 'seiton');
+            }
+        });
+    } finally {
+        if (previousGithubToken === undefined) {
+            delete process.env.GITHUB_TOKEN;
+        } else {
+            process.env.GITHUB_TOKEN = previousGithubToken;
         }
-    });
+    }
 
     assert.equal(result.releaseTag, 'v0.9.19');
     assert.equal(result.version, '0.9.19');
@@ -150,6 +167,9 @@ test('runSetupSeiton installs expected artifact on linux flow', async () => {
     assert.equal(coreCalls.outputs.seiton_path, extractedDir);
     assert.deepEqual(coreCalls.paths, [extractedDir]);
     assert.deepEqual(chmodCalls, [{ filePath: path.join(extractedDir, 'seiton'), mode: 0o755 }]);
+    assert.equal(releaseToken, 'env-token');
+    assert.equal(downloadOptions.length, 2);
+    assert.ok(downloadOptions.every((options) => options.headers.Authorization.endsWith('env-token')));
     assert.ok(coreCalls.info.includes('Checksum verified'));
     assert.ok(coreCalls.info.includes('Installed seiton v0.9.19'));
 });

@@ -12,7 +12,6 @@ inputs:
   github_token:
     description: "Optional GitHub token to avoid API rate limits when resolving latest release."
     required: false
-    default: "${{ github.token }}"
 outputs:
   seiton_version:
     description: "Installed seiton version."
