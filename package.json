@@ -1,0 +1,29 @@
+{
+  "name": "setup-seiton",
+  "version": "0.9.0",
+  "private": true,
+  "description": "Setup seiton CLI for GitHub Actions",
+  "license": "MIT",
+  "publisher": "guitarrapc",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "ncc build index.js --out dist"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/guitarrapc/setup-seiton.git"
+  },
+  "keywords": [],
+  "author": "guitarrapc",
+  "dependencies": {
+    "@actions/core": "1.11.1",
+    "@actions/io": "1.1.3",
+    "@actions/tool-cache": "2.0.2"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "0.38.4"
+  }
+}

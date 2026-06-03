@@ -1,0 +1,22 @@
+name: "Setup Seiton"
+description: "Sets up seiton CLI in your GitHub Actions workflow."
+author: "guitarrapc"
+inputs:
+  seiton_version:
+    description: "The version of seiton to install. Use latest to install the latest release."
+    default: "latest"
+    required: false
+  github_token:
+    description: "Optional GitHub token to avoid API rate limits when resolving latest release."
+    required: false
+outputs:
+  seiton_version:
+    description: "Installed seiton version."
+  seiton_path:
+    description: "Directory path added to PATH that contains seiton binary."
+runs:
+  using: "node24"
+  main: "dist/index.js"
+branding:
+  icon: "terminal"
+  color: "green"
